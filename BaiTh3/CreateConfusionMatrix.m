@@ -1,0 +1,15 @@
+function matrix = CreateConfusionMatrix()
+    [allTrainImages,allTrainLabels]  = loadData('./train-images.idx3-ubyte', './train-labels.idx1-ubyte');
+    [allTestImages, allTestLabels] = loadData('./t10k-images.idx3-ubyte','./t10k-labels.idx1-ubyte');
+    mdl = fitcknn(allTrainImages', allTrainLabels);
+    matrix = zeros(10);
+    countTestImages = size(allTestImages, 2);
+    for i = 1: countTestImages
+        correctLabel = allTestLabels(i);
+        
+        imageTest = allTestImages(:, i);
+        predictedLabel = predict(mdl, imageTest');   
+       matrix(correctLabel+1, predictedLabel+1) = matrix(correctLabel+1, predictedLabel+1) + 1;
+    end
+end
+
