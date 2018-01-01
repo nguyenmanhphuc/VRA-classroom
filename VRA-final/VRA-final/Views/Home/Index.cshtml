@@ -1,0 +1,140 @@
+﻿@model string[]
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h2>Tìm kiếm ảnh</h2>
+<span>Vui lòng chọn ảnh</span><input type="file" class="btn" value="Choose file" id="file-input" />
+<img id="whole-image" />
+<br />
+<div id="result">
+    <h3>Các ảnh phù hợp: </h3>
+    <div style="width:100%">
+        @foreach (var image in Model)
+        {
+            <div class="img-div">
+                <img src="@image" class="img-thumbnail" />
+            </div>
+        }
+    </div>
+</div>
+<div id="page-selection">
+
+</div>
+<canvas id="select-image"></canvas>
+<style>
+    .img-div {
+        width: 22%;
+        padding: 20px;
+        display: inline-block
+    }
+</style>
+<script>
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#whole-image').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function dataURItoBlob(dataURI) {
+        // convert base64/URLEncoded data component to raw binary data held in a string
+        var byteString;
+        if (dataURI.split(',')[0].indexOf('base64') >= 0)
+            byteString = atob(dataURI.split(',')[1]);
+        else
+            byteString = unescape(dataURI.split(',')[1]);
+
+        // separate out the mime component
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+        // write the bytes of the string to a typed array
+        var ia = new Uint8Array(byteString.length);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+
+        return new Blob([ia], { type: mimeString });
+    }
+
+
+    function preview(image, selection) {
+        var canvas = document.getElementById("select-image");
+        var ctx = canvas.getContext('2d');
+
+        canvas.width = selection.width;
+        canvas.height = selection.height;
+        ctx.drawImage(image, selection.x1, selection.y1, selection.width, selection.height, 0, 0, selection.width, selection.height);
+        var base64Data = canvas.toDataURL();
+        selectedRegion = selection;
+        ctx.clearRect(0, 0, selection.width, selection.height);
+
+        var blob = dataURItoBlob(base64Data);
+        var fd = new FormData();
+        fd.append("canvasImage", blob);
+
+        $.ajax({
+            url: "/Home/Search",
+            type: "POST",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: fd
+        })
+
+            .done(function (res) {
+                result = res;
+                $('#page-selection').bootpag({
+                    total: Math.ceil(res.length / 20),
+                    page: 1,
+                    maxVisible: 7,
+                    //href: "#",
+                    leaps: false,
+                    //next: 'next',
+                    //prev: 'previous'
+                }).on('page', function (event, num) {
+                    showPage(num);
+                });
+                showPage(1);
+            });
+
+        //console.log(url);
+    }
+    function showPage(page) {
+        var imgs = [];
+        for (var i = (page - 1) * 20; i < page * 20 && i < result.length; ++i) {
+            imgs.push(result[i]);
+        }
+        showImages(imgs);
+        $("body").scrollTop($("#result").offset().top - 20);
+        //$("html, body").animate({ scrollTop: $("#result").offset().top - 20 }, "slow");
+    }
+    function showImages(images) {
+        var resDiv = $('#result');
+        resDiv.html('');
+        for (var i = 0; i < images.length; ++i) {
+            resDiv.append(' <div class="img-div">' +
+                '<img src="' + images[i] + '" class="img-thumbnail"/></div>');
+        }
+    }
+
+    $(function () {
+        $("#file-input").change(function () {
+            readURL(this);
+            $('#whole-image').imgAreaSelect({ remove: true });
+            $('#whole-image').imgAreaSelect({
+                handles: true,
+                onSelectEnd: preview
+            });
+        });
+        //$('#whole-image').imgAreaSelect({ remove: true } );
+
+
+    })
+
+</script>
