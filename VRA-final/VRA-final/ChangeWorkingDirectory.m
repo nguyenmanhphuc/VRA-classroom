@@ -1,5 +1,0 @@
-function ChangeWorkingDirectory( folder )
-
-
-end
-

@@ -3,7 +3,7 @@ function output = ComputeSIFTFeatures(datasetDir, pattern, featurePath,infoPath)
         files = getFiles(datasetDir, pattern);
         fprintf('Computing SIFT features:\n');
 
-        features = zeros(128, 12000000);
+        features = zeros(128, 8000000);
         nfeat = 0;
         nfiles = length(files);
         features_per_image = zeros(1,nfiles);

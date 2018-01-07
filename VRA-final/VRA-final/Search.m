@@ -1,4 +1,4 @@
-% Search('all_souls_000013.jpg', [136.5, 34.1, 648.5, 955.7], 'all_souls_1_query.txt', 20, 'C:\Users\nguye\Desktop\APP\VIR-Demo\VIR-Demo\' )
+% Search('all_souls_000013.jpg', [136.5, 34.1, 648.5, 955.7], 20, 'C:\Users\nguye\Desktop\APP\VIR-Demo\VIR-Demo\' )
 function result = Search( fileName, parts, top, path)
 %% init parameter
 addpath('AKM');
@@ -7,8 +7,8 @@ run('vlfeat\toolbox\vl_setup.m');
 
 datasetDir = [path, 'oxford\images\'];
 
-num_words = 50000;
-num_iterations = 10;
+num_words = 100000;
+num_iterations = 15;
 num_trees = 8;
 if_weight = 'tfidf';
 
@@ -43,6 +43,5 @@ verbose=0;
     inv_file = CreateInvertedFile(words, num_words, if_weight, if_norm);
     result = QueryImage([path,'oxford\images\', fileName], parts, dict_words, dict,inv_file, if_weight,if_norm, if_dist, verbose, files, top);
     
-ccvInvFileClean(inv_file{1});
 end
 

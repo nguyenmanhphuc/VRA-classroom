@@ -18,11 +18,11 @@ function result = QueryImage(fileName, numbers, dict_words, dict, inv_file, if_w
  
     [ids, dists] = ccvInvFileSearch(inv, q_words(1), if_weight, if_norm, if_dist, top);
     
-    result = cell(1, max(size(ids, 2), top));
+    result = cell(1, max(size(ids{1}, 2), top));
     for i=1:size(result, 2)
 
-            if(ids(i)>=1)
-                result{i} = files(ids(i)).name;
+            if(ids{1}(i)>=1)
+                result{i} = files(ids{1}(i)).name;
             else
                 result = result(1:i-1);
                break;

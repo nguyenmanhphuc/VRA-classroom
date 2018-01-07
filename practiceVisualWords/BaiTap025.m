@@ -6,11 +6,12 @@ function BaiTap025()
     minSetCount = min(tbl01{:, 2});
     imds = splitEachLabel(imds, minSetCount, 'randomize');
     tbl02 = countEachLabel (imds);
-%     bag = bagOfFeatures(imds);
-%     save('BagOfWords.mat', 'bag');
-    
-    load('BagOfWords.mat', 'bag');
-    
+    bag = bagOfFeatures(imds);
+    if ~ exist('BagOfWords.mat', 'file')
+        save('BagOfWords.mat', 'bag');
+    else
+     load('BagOfWords.mat', 'bag');
+    end
     img  = readimage(imds, 1);
     featureVector = encode (bag, img);
     figure

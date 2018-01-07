@@ -16,7 +16,7 @@ for k=1:length(q_files)
     file = strcat('oxford\images\', image_name(6:end), '.jpg');
     I = im2single(rgb2gray(imread(file)));
 
-    imageIDs = retrieveImages(I,imageIndex,'ROI', uint8([x1+1, y1+1, x2+1, y2+1]));
+    imageIDs = retrieveImages(I,imageIndex,'ROI', uint8([x1 y1 (x2-x1) (y2-y1)]+1));
     fid = fopen('oxford\groundtruth\rank_list.txt', 'w');
     for i=1:size(imageIDs)
       path =  imageIndex.ImageLocation{imageIDs(i)};

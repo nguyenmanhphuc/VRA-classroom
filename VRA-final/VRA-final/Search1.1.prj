@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="610257385" file="C:\Users\nguye\Desktop\APP\VIR-Demo\VIR-Demo\Search1.1.prj" location="C:\Users\nguye\Desktop\APP\VIR-Demo\VIR-Demo" name="Search1.1" preferred-package-location="C:\Users\nguye\Desktop\APP\VIR-Demo\VIR-Demo\Search1.1\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.library" target-name="Library Compiler">
+  <configuration build-checksum="717820326" file="F:\Mathlab\source\c\VRA-final\VRA-final\Search1.1.prj" location="F:\Mathlab\source\c\VRA-final\VRA-final" name="Search1.1" preferred-package-location="F:\Mathlab\source\c\VRA-final\VRA-final\Search1.1\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.library" target-name="Library Compiler">
     <param.appname>Search</param.appname>
     <param.icon />
     <param.icons />
@@ -45,7 +45,7 @@
     <param.net.tsa.namespace />
     <param.net.tsa.superclass>VIR</param.net.tsa.superclass>
     <param.net.tsa.metadata />
-    <param.net.tsa.metadata.assembly>C:\WINDOWS\system32</param.net.tsa.metadata.assembly>
+    <param.net.tsa.metadata.assembly>C:\Windows\system32</param.net.tsa.metadata.assembly>
     <param.net.saved.interface />
     <unset>
       <param.icon />
@@ -95,7 +95,6 @@
     </unset>
     <fileset.exports>
       <file>${PROJECT_ROOT}\BuildDictionary.m</file>
-      <file>${PROJECT_ROOT}\ChangeWorkingDirectory.m</file>
       <file>${PROJECT_ROOT}\ComputeDict.m</file>
       <file>${PROJECT_ROOT}\ComputeRootSIFTFeatures.m</file>
       <file>${PROJECT_ROOT}\ComputeSIFTFeatures.m</file>
@@ -113,7 +112,6 @@
       <entity.package name="">
         <entity.class name="VIR">
           <file>${PROJECT_ROOT}\BuildDictionary.m</file>
-          <file>${PROJECT_ROOT}\ChangeWorkingDirectory.m</file>
           <file>${PROJECT_ROOT}\ComputeDict.m</file>
           <file>${PROJECT_ROOT}\ComputeRootSIFTFeatures.m</file>
           <file>${PROJECT_ROOT}\ComputeSIFTFeatures.m</file>
@@ -357,7 +355,6 @@
       <file>${PROJECT_ROOT}\AKM\ccvHkmExport.m</file>
       <file>${PROJECT_ROOT}\AKM\ccvHkmImport.m</file>
       <file>${PROJECT_ROOT}\AKM\ccvHkmLeafIds.m</file>
-      <file>${PROJECT_ROOT}\AKM\ccvInvFileClean.m</file>
       <file>${PROJECT_ROOT}\AKM\ccvInvFileCompStats.m</file>
       <file>${PROJECT_ROOT}\AKM\ccvInvFileInsert.m</file>
       <file>${PROJECT_ROOT}\AKM\ccvInvFileSearch.m</file>
@@ -371,7 +368,6 @@
       <file>${PROJECT_ROOT}\AKM\ccvRandSeed.m</file>
       <file>${PROJECT_ROOT}\AKM\ccvSumIndexed.m</file>
       <file>${PROJECT_ROOT}\AKM\mxDistance.mexw64</file>
-      <file>${PROJECT_ROOT}\AKM\mxInvFileClean.mexw64</file>
       <file>${PROJECT_ROOT}\AKM\mxInvFileCompStats.mexw64</file>
       <file>${PROJECT_ROOT}\AKM\mxInvFileFillData.mexw64</file>
       <file>${PROJECT_ROOT}\AKM\mxInvFileSearch.mexw64</file>
@@ -387,14 +383,14 @@
     </fileset.depfun>
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\Search1.1\for_testing" name="Search.dll" optional="false">C:\Users\nguye\Desktop\APP\VIR-Demo\VIR-Demo\Search1.1\for_testing\Search.dll</file>
-      <file location="${PROJECT_ROOT}\Search1.1\for_testing" name="Search_overview.html" optional="false">C:\Users\nguye\Desktop\APP\VIR-Demo\VIR-Demo\Search1.1\for_testing\Search_overview.html</file>
-      <file location="${PROJECT_ROOT}\Search1.1\for_testing" name="SearchNative.dll" optional="false">C:\Users\nguye\Desktop\APP\VIR-Demo\VIR-Demo\Search1.1\for_testing\SearchNative.dll</file>
-      <file location="${PROJECT_ROOT}\Search1.1\for_testing" name="readme.txt" optional="true">C:\Users\nguye\Desktop\APP\VIR-Demo\VIR-Demo\Search1.1\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\Search1.1\for_testing" name="SearchNative.dll" optional="false">F:\Mathlab\source\c\VRA-final\VRA-final\Search1.1\for_testing\SearchNative.dll</file>
+      <file location="${PROJECT_ROOT}\Search1.1\for_testing" name="readme.txt" optional="true">F:\Mathlab\source\c\VRA-final\VRA-final\Search1.1\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\Search1.1\for_testing" name="Search.dll" optional="false">F:\Mathlab\source\c\VRA-final\VRA-final\Search1.1\for_testing\Search.dll</file>
+      <file location="${PROJECT_ROOT}\Search1.1\for_testing" name="Search_overview.html" optional="false">F:\Mathlab\source\c\VRA-final\VRA-final\Search1.1\for_testing\Search_overview.html</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>G:\Mathlab</root>
+      <root>F:\Mathlab</root>
       <toolboxes>
         <toolbox name="fixedpoint" />
         <toolbox name="matlabcoder" />

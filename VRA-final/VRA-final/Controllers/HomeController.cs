@@ -15,7 +15,7 @@ namespace VRA_final.Controllers
         static string if_weight = "tfidf";
         static string if_norm = "l2";
         static string if_dist = "l2";
-        static int nWords = 50000;
+        static int nWords = 100000;
         static string datasetDir = "";
         static string featurePath = "";
         static string infoPath = "";
@@ -25,7 +25,7 @@ namespace VRA_final.Controllers
         static MWArray dict = null;
         static MWArray dict_words = null;
         static MWArray inv_file = null;
-        static int _numInter = 100;
+        static int _numInter = 15;
         static int _numTree = 8;
         static int _nTop = 1000;
         public HomeController()
@@ -41,9 +41,10 @@ namespace VRA_final.Controllers
                 if (dict_words == null || dict == null || inv_file == null)
                 {
 
-                    VIR obj = new VIR();
-                    var words = obj.LoadWords(wordsPath);
+                    Search.VIR obj = new Search.VIR();
+
                     dict_words = obj.LoadDict(dictPath);
+                    var words = obj.LoadWords(wordsPath);
                     dict = obj.ComputeDict(dict_words, _numInter, num_trees: _numTree);
                     files = obj.LoadFiles(infoPath);
                     if (inv_file == null)
@@ -70,12 +71,7 @@ namespace VRA_final.Controllers
             return View(output);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
+  
 
         public JsonResult Search()
         {
@@ -98,9 +94,9 @@ namespace VRA_final.Controllers
                 Search.VIR obj = new Search.VIR();
                 var b = new double[] { 0, 0, img.Height, img.Width };
                 var res = obj.QueryImage(path, new MWNumericArray(b), dict_words, dict, inv_file,
-                     if_weight, if_norm, if_norm, 0, files, _nTop);
+                     if_weight, if_norm, if_norm, 0, files, 0);
 
-                output = new string[res.Dimensions[1]];
+                output = new string[Math.Min(res.Dimensions[1], 1000)];
                 for (var i = 0; i < output.Length; ++i)
                 {
                     output[i] = Path.Combine(@"\oxford\images", res[i + 1].ToString());
